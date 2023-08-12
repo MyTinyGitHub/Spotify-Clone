@@ -1,5 +1,6 @@
 package com.training.spotiClone.dao;
 
+import com.training.spotiClone.repositors.list.IdProvider;
 import lombok.Data;
 
 @Data
@@ -8,8 +9,8 @@ public class Song {
     private String name;
     private String author;
 
-    public Song(long id, String name, String author) {
-        this.id = id;
+    public Song(String name, String author) {
+        this.id = IdProvider.generateSongId();
         this.name = name;
         this.author = author;
     }

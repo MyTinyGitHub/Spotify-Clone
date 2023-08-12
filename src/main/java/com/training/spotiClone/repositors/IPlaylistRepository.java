@@ -11,8 +11,8 @@ import java.util.Optional;
 @Repository
 public interface IPlaylistRepository {
     public Optional<Playlist> getPlaylistById(long id);
-    public List<Playlist> getUsersPlayLists(User user);
-    public boolean addPlaylist(User user, Playlist playlist);
+    public List<Playlist> getUsersPlayLists(Long userId);
+    public boolean addPlaylist(Playlist playlist);
     public boolean addSongToPlayList(long playListId, long song);
 
     public String toString();

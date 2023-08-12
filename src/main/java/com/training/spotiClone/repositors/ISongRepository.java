@@ -8,4 +8,5 @@ public interface ISongRepository {
     public Optional<Song> getSongById(long id);
     public Optional<Song> getRandomSong();
     public void add(Song song);
+    public boolean exists(String name, String author);
 }

@@ -18,9 +18,15 @@ public class PlayListController extends BaseController {
     }
 
     @PostMapping("/playlist/add")
-    public String addPlaylist(@RequestBody Playlist playList) {
-        User user = getUserRepository().getUserById(playList.getOwnerId());
-        boolean songAdded = getPlaylistRepository().addPlaylist(user, playList);
+    public String addPlaylist(@RequestParam Map<String, String> input) {
+        Long userId = Long.valueOf(input.get("ownerId"));
+
+        String name = input.get("name");
+        if(name == null) {
+            return "No name of playlist provided";
+        }
+
+        boolean songAdded = getPlaylistRepository().addPlaylist(new Playlist(userId, name));
         return songAdded ? "Playlist successfully added" : "Not possible to add playlist";
     }
 

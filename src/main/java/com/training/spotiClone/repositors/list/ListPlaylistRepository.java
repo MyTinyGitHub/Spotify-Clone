@@ -14,11 +14,13 @@ import java.util.stream.Collectors;
 
 @Repository
 public class ListPlaylistRepository implements IPlaylistRepository {
-    private final HashMap<User, List<Playlist>> playListTable = new HashMap<>();
+    private final HashMap<Long, List<Playlist>> playListTable = new HashMap<>();
     private static final int PLAYLIST_LIMIT = 5;
 
     @Autowired
     private ISongRepository songRepository;
+    @Autowired
+    private ListUserRepository userRepository;
 
     @Override
     public Optional<Playlist> getPlaylistById(long id) {
@@ -29,12 +31,14 @@ public class ListPlaylistRepository implements IPlaylistRepository {
     }
 
     @Override
-    public List<Playlist> getUsersPlayLists(User user) {
-        return playListTable.getOrDefault(user, List.of());
+    public List<Playlist> getUsersPlayLists(Long userId) {
+        return playListTable.getOrDefault(userId, List.of());
     }
     @Override
-    public boolean addPlaylist(User user, Playlist playlist) {
-        List<Playlist> playlists = playListTable.getOrDefault(user, List.of());
+    public boolean addPlaylist(Playlist playlist) {
+        User user = userRepository.getUserById(playlist.getOwnerId());
+
+        List<Playlist> playlists = playListTable.getOrDefault(user.getId(), List.of());
 
         boolean isGuest = UserType.GUEST.equals(user.getType());
         boolean isPremium = UserType.PREMIUM.equals(user.getType());
@@ -48,7 +52,7 @@ public class ListPlaylistRepository implements IPlaylistRepository {
             return false;
         }
 
-        playListTable.merge(user, List.of(playlist), this::combine);
+        playListTable.merge(user.getId(), List.of(playlist), this::combine);
         return true;
     }
 

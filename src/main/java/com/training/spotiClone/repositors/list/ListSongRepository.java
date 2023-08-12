@@ -13,14 +13,14 @@ import java.util.Random;
 public class ListSongRepository implements ISongRepository {
     private List<Song> songs = new ArrayList<>();
     {
-        songs.add(new Song(1, "Metalica", "Metalica"));
-        songs.add(new Song(2, "Metalica2", "Metalica"));
-        songs.add(new Song(3, "Metalica3", "Metalica"));
-        songs.add(new Song(4, "Metalica4", "Metalica"));
+        songs.add(new Song("Metalica", "Metalica"));
+        songs.add(new Song("Metalica2", "Metalica"));
+        songs.add(new Song("Metalica3", "Metalica"));
+        songs.add(new Song("Metalica4", "Metalica"));
 
-        songs.add(new Song(5, "HU1", "Holywood Undead"));
-        songs.add(new Song(6, "HU1", "Holywood Undead"));
-        songs.add(new Song(7, "HU1", "Holywood Undead"));
+        songs.add(new Song("HU1", "Hollywood Undead"));
+        songs.add(new Song("HU1", "Hollywood Undead"));
+        songs.add(new Song("HU1", "Hollywood Undead"));
     }
 
     public Optional<Song> getSongById(long id) {
@@ -31,6 +31,12 @@ public class ListSongRepository implements ISongRepository {
     public Optional<Song> getRandomSong() {
         int randomPosition = new Random().nextInt(songs.size());
         return Optional.ofNullable(songs.get(randomPosition));
+    }
+
+    @Override
+    public boolean exists(String name, String author) {
+        return songs.stream()
+                .anyMatch(song -> song.getName().equals(name) && song.getAuthor().equals(author));
     }
 
     public void add(Song song) {

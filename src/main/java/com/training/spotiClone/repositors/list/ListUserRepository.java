@@ -30,4 +30,9 @@ public class ListUserRepository implements IUserRepository {
                 .filter(user -> UserType.PREMIUM.equals(user.getType()))
                 .toList();
     }
+
+    @Override
+    public boolean exists(String userName) {
+        return users.stream().anyMatch( user -> user.getName().equals(userName));
+    }
 }

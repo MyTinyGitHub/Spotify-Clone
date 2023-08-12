@@ -14,7 +14,7 @@ public class BaseController {
     @Qualifier("listSongRepository")
     private ISongRepository songRepository;
     @Autowired
-    @Qualifier("listUserRepository")
+    @Qualifier("jdbcUserRepository")
     private IUserRepository userRepository;
 
     public IUserRepository getUserRepository() {
