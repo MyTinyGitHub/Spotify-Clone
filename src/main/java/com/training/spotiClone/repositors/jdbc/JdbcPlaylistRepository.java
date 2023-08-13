@@ -2,12 +2,14 @@ package com.training.spotiClone.repositors.jdbc;
 
 import com.training.spotiClone.dao.Playlist;
 import com.training.spotiClone.dao.Song;
+import com.training.spotiClone.dao.UserType;
 import com.training.spotiClone.repositors.IPlaylistRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -37,8 +39,27 @@ public class JdbcPlaylistRepository extends JdbcRepository implements IPlaylistR
 
     @Override
     public boolean addPlaylist(Playlist playlist) {
-        String sql = "INSERT INTO PLAYLIST (id, owner_id, name) VALUES (?, ?, ?)";
-        return getJdbcOperations().update(sql, playlist.getId(), playlist.getOwnerId(), playlist.getName()) > 0;
+
+        boolean userNotAllowed = playlist.getOwnerId() <= 0;
+        if(userNotAllowed) {
+            return false;
+        }
+
+        String selectSql = "SELECT COUNT(1) AS COUNT, TYPE FROM PLAYLIST " +
+                        "JOIN USERS ON OWNER_ID = USERS.ID " +
+                        "WHERE OWNER_ID = ?";
+
+        Map<String,Object> result = getJdbcOperations().queryForMap(selectSql, playlist.getOwnerId());
+
+        Boolean isPremiumUser = UserType.valueOf((Integer) result.get("TYPE")).equals(UserType.PREMIUM);
+        Long numberOfPlaylists = (Long) result.get("COUNT");
+
+        if(!isPremiumUser && numberOfPlaylists >= PLAYLIST_LIMIT) {
+            return false;
+        }
+
+        String insertSql = "INSERT INTO PLAYLIST (id, owner_id, name) VALUES (?, ?, ?)";
+        return getJdbcOperations().update(insertSql, playlist.getId(), playlist.getOwnerId(), playlist.getName()) > 0;
     }
 
     @Override

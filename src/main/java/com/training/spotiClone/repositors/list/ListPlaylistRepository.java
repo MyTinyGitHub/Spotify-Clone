@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ListPlaylistRepository implements IPlaylistRepository {
     private final HashMap<Long, List<Playlist>> playListTable = new HashMap<>();
-    private static final int PLAYLIST_LIMIT = 5;
 
     @Autowired
     @Qualifier("listSongRepository")

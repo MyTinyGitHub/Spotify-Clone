@@ -1,5 +1,6 @@
 package com.training.spotiClone.dao;
 
+import com.training.spotiClone.repositors.list.IdProvider;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -20,7 +21,7 @@ public class Playlist {
     }
 
     public Playlist(long ownerId, String name) {
-        this.id = id;
+        this.id = IdProvider.generatePlaylistId();
         this.ownerId = ownerId;
         this.name = name;
         this.songs = new ArrayList<>();

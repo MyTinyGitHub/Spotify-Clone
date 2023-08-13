@@ -10,6 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface IPlaylistRepository {
+    static final int PLAYLIST_LIMIT = 5;
+
     public Optional<Playlist> getPlaylistById(long id);
     public List<Playlist> getUsersPlayLists(Long userId);
     public boolean addPlaylist(Playlist playlist);
