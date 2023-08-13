@@ -13,12 +13,12 @@ import java.util.Optional;
 @RestController
 public class PlayListController extends BaseController {
     @GetMapping("/playlist")
-    public String getAllSongs() {
-        return getPlaylistRepository().toString();
+    public String getAllSongs(@RequestBody Map<String, Long> input) {
+        return getPlaylistRepository().getUsersPlayLists(input.getOrDefault("userId", -1L)).toString();
     }
 
     @PostMapping("/playlist/add")
-    public String addPlaylist(@RequestParam Map<String, String> input) {
+    public String addPlaylist(@RequestBody Map<String, String> input) {
         Long userId = Long.valueOf(input.get("ownerId"));
 
         String name = input.get("name");
@@ -31,7 +31,7 @@ public class PlayListController extends BaseController {
     }
 
     @PostMapping("playlist/addSong")
-    public String addSongToPlaylist(@RequestParam Map<String, Long> input) {
+    public String addSongToPlaylist(@RequestBody Map<String, Long> input) {
         long playlistId = input.getOrDefault("playlistId", -1L);
         long songId = input.getOrDefault("songId", -1L);
 

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 public class BaseController {
     @Autowired
-    @Qualifier("listPlaylistRepository")
+    @Qualifier("jdbcPlaylistRepository")
     private IPlaylistRepository playlistRepository;
     @Autowired
-    @Qualifier("listSongRepository")
+    @Qualifier("jdbcSongRepository")
     private ISongRepository songRepository;
     @Autowired
     @Qualifier("jdbcUserRepository")

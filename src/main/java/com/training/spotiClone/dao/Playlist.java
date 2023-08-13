@@ -13,6 +13,12 @@ public class Playlist {
     private String name;
     private List<Song> songs;
 
+    public Playlist(long id, long ownerId, String name) {
+        this.id = id;
+        this.ownerId = ownerId;
+        this.name = name;
+    }
+
     public Playlist(long ownerId, String name) {
         this.id = id;
         this.ownerId = ownerId;

@@ -7,6 +7,7 @@ import com.training.spotiClone.dao.UserType;
 import com.training.spotiClone.repositors.IPlaylistRepository;
 import com.training.spotiClone.repositors.ISongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -18,8 +19,10 @@ public class ListPlaylistRepository implements IPlaylistRepository {
     private static final int PLAYLIST_LIMIT = 5;
 
     @Autowired
+    @Qualifier("listSongRepository")
     private ISongRepository songRepository;
     @Autowired
+    @Qualifier("listUserRepository")
     private ListUserRepository userRepository;
 
     @Override

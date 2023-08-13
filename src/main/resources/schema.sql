@@ -8,7 +8,7 @@ create table if not exists Users (
 create table if not exists Song (
     id identity,
     name varchar(50) not null,
-    interpret varchar(50) not null
+    author varchar(50) not null
 );
 
 create table if not exists Playlist (

@@ -5,13 +5,13 @@ DELETE FROM PLAYLIST;
 INSERT INTO USERS (id, user_name, password, type) VALUES(1, 'test_regular', 'test', 1);
 INSERT INTO USERS (id, user_name, password, type) VALUES(2, 'test_premium', 'test', 2);
 
-INSERT INTO SONG (id, name, interpret) VALUES(1, 'Metalica1', 'Metalica');
-INSERT INTO SONG (id, name, interpret) VALUES(2, 'Metalica2', 'Metalica');
-INSERT INTO SONG (id, name, interpret) VALUES(3, 'Metalica3', 'Metalica');
-INSERT INTO SONG (id, name, interpret) VALUES(4, 'Metalica4', 'Metalica');
-INSERT INTO SONG (id, name, interpret) VALUES(5, 'HU1', 'Hollywood Undead');
-INSERT INTO SONG (id, name, interpret) VALUES(6, 'HU2', 'Hollywood Undead');
-INSERT INTO SONG (id, name, interpret) VALUES(7, 'HU3', 'Hollywood Undead');
+INSERT INTO SONG (id, name, author) VALUES(1, 'Metalica1', 'Metalica');
+INSERT INTO SONG (id, name, author) VALUES(2, 'Metalica2', 'Metalica');
+INSERT INTO SONG (id, name, author) VALUES(3, 'Metalica3', 'Metalica');
+INSERT INTO SONG (id, name, author) VALUES(4, 'Metalica4', 'Metalica');
+INSERT INTO SONG (id, name, author) VALUES(5, 'HU1', 'Hollywood Undead');
+INSERT INTO SONG (id, name, author) VALUES(6, 'HU2', 'Hollywood Undead');
+INSERT INTO SONG (id, name, author) VALUES(7, 'HU3', 'Hollywood Undead');
 
 INSERT INTO PLAYLIST(id, owner_id, name) VALUES( 1, 1, 'BEST');
 INSERT INTO PLAYLIST(id, owner_id, name) VALUES( 2, 2, 'BEST PREMIUM PLAYLIST');

@@ -9,6 +9,12 @@ public class Song {
     private String name;
     private String author;
 
+    public Song(Long id, String name, String author) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+    }
+
     public Song(String name, String author) {
         this.id = IdProvider.generateSongId();
         this.name = name;

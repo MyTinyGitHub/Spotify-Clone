@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 public class IdProvider {
     public static long songId = 1000L;
     public static long userId = 1000L;
+    public static long playlistId = 1000L;
 
-    public static Long generateSongId() {
-        return songId++;
-    }
-
+    public static Long generateSongId() { return songId++; }
     public static Long generateUserId() {
         return userId++;
     }
+    public static Long generatePlaylistId() { return playlistId++; }
 }

@@ -13,8 +13,8 @@ public class PlayerController extends BaseController {
     @Autowired
     PlayerStatisticsController playerStatistics;
 
-    @GetMapping("/play/{songId}")
-    public String playSong(@PathVariable Map<String, Long> input) {
+    @GetMapping("/play")
+    public String playSong(@RequestBody Map<String, Long> input) {
         Long songId = input.getOrDefault("songId", -1L);
         Optional<Song> song = getSongRepository().getSongById(songId);
 
@@ -24,7 +24,7 @@ public class PlayerController extends BaseController {
     }
 
     @GetMapping("/play/random/")
-    public String playRandom(@RequestParam Map<String, Long> input) {
+    public String playRandom(@RequestBody Map<String, Long> input) {
         Optional<Song> song = getSongRepository().getRandomSong();
 
         playAd(input);
